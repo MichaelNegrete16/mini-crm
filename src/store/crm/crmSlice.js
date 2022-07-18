@@ -1,24 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Datos temporales
-const tempEvent = {
-    id: new Date().getTime(),
-    name: 'Michael',
-    lastName: 'Negrete',
-    tarea: 'hacer diseño',
-    email: 'correo@correo.com',
-    telefono: 123123123,
-    direccion: 'Sucre',
-}
+// const tempEvent = {
+//     id: new Date().getTime(),
+//     name: 'Michael',
+//     lastName: 'Negrete',
+//     tarea: 'hacer diseño',
+//     email: 'correo@correo.com',
+//     telefono: 123123123,
+//     direccion: 'Sucre',
+// }
 
 export const crmSlice = createSlice({
     name: 'CRM',
     initialState: {
-        events: [tempEvent],
+        events: [],
         activeEvent: null,
         isCrmModalOpen : false
     },
     reducers: {
+
         
         // Metodos para agregar o eliminar del storage
         onSetActiveEvent: (state, {payload}) => {
@@ -31,7 +32,7 @@ export const crmSlice = createSlice({
 
         onUpdateEvent: (state,{payload}) => {
             state.events = state.events.map(event => {
-                if(event.id === payload.id){
+                if(event._id === payload._id){
                     return payload
                 }
                 return event
@@ -40,10 +41,21 @@ export const crmSlice = createSlice({
 
         onDeleteEvent: (state,{payload}) => {
             if(payload){
-                state.events = state.events.filter(event => event.id !== payload.id)
+                state.events = state.events.filter(event => event._id !== payload._id)
                 
             }            
         },
+
+        // Cargar eventos de la base de datos
+        onLoadEvents : (state, {payload = []}) => {
+            // state.events = payload
+            payload.forEach(event => {
+                const exist = state.events.some(dbEvent => dbEvent._id === event._id)
+                if(!exist){
+                  state.events.push(event)
+                }
+            })
+       },
 
         // Ui Modal
         onOpenCrmModal : (state, {payload}) => {
@@ -63,4 +75,5 @@ export const {onAddNewEvent,
               onDeleteEvent,
               onOpenCrmModal,
               onCloseCrmModal,
+              onLoadEvents,
               onSetActiveEvent} = crmSlice.actions

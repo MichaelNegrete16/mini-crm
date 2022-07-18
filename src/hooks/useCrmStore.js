@@ -1,5 +1,7 @@
 import {useDispatch, useSelector } from "react-redux"
-import { onAddNewEvent, onCloseCrmModal, onDeleteEvent, onOpenCrmModal, onUpdateEvent } from "../store/crm/crmSlice"
+import Swal from "sweetalert2"
+import crmApi from "../../api/crmApi"
+import { onAddNewEvent, onCloseCrmModal, onDeleteEvent, onLoadEvents, onOpenCrmModal, onUpdateEvent } from "../store/crm/crmSlice"
 
 export const useCrmStore = () => {
     
@@ -11,18 +13,42 @@ export const useCrmStore = () => {
     //     dispatch(onAddNewEvent({...crmEvent, id: new Date().getTime()}))
     // }
 
-    const startUpdateEvent = (crmEvent) => {
-        if(crmEvent.id){
-            //Actualizando
-            dispatch(onUpdateEvent({...crmEvent}))
-        }else{
+    const startUpdateEvent = async(crmEvent) => {
+        
+        try {
+            if(crmEvent._id){
+                //Actualizando
+                // dispatch(onUpdateEvent({...crmEvent}))
+                await crmApi.put(`/${crmEvent._id}`, crmEvent)
+                dispatch(onUpdateEvent({...crmEvent}))
+                return
+            }
+
             // Creando nuevo evento
-            dispatch(onAddNewEvent({...crmEvent, id: new Date().getTime()}))
-        }
+            // dispatch(onAddNewEvent({...crmEvent, id: new Date().getTime()}))
+
+            // Hacer post a la base de datos
+            const {data} = await crmApi.post('/',crmEvent)
+            console.log(data)
+            dispatch(onAddNewEvent({...crmEvent, id: data.msg._id}))
+
+        } catch (error) {
+           console.log(error)
+           Swal.fire('Error al guardar',error.data.response.data.msg,'error') 
+        }    
+        
     }
 
-    const startDeleteEvent = (data) => {
-        dispatch(onDeleteEvent({...data}))
+    const startDeleteEvent = async(data) => {
+        // dispatch(onDeleteEvent({...data}))
+        // Eliminar de la base de datos
+        try{
+            await crmApi.delete(`/${data._id}`)
+            dispatch(onDeleteEvent({...data}))
+        }catch(error){
+            console.log(error)
+            Swal.fire('Error al eliminar',error.response.data.msg,'error')
+        }
     }
 
     // Funciones para llamar el reducer del modal
@@ -32,6 +58,18 @@ export const useCrmStore = () => {
 
     const closeCrmModal = () => {
         dispatch(onCloseCrmModal())
+    }
+
+    // Cargar los enventos del backend
+    const startLoadingEvents = async() => {
+        try {
+            
+            const {data} = await crmApi.get('/')
+            dispatch(onLoadEvents(data.msg))
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return{
@@ -44,7 +82,8 @@ export const useCrmStore = () => {
         startDeleteEvent,
         openCrmModal,
         closeCrmModal,
-        startUpdateEvent
+        startUpdateEvent,
+        startLoadingEvents
     }
 
 }

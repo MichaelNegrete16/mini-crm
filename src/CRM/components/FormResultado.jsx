@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 // Importacion para mostrar alertas
 import Swal from 'sweetalert2'
 // Hooks
@@ -5,7 +6,7 @@ import { useCrmStore } from '../../hooks/useCrmStore'
 
 const FormResultado = () => {
 
-    const {events, startDeleteEvent, openCrmModal} = useCrmStore()
+    const {events, startDeleteEvent, openCrmModal,startLoadingEvents} = useCrmStore()
 
     const handleClickEvent = (data) => {
         // llamado de evento Swal para mostrar la alerta
@@ -29,19 +30,24 @@ const FormResultado = () => {
           })
     }
 
+      // Cargar los eventos del backend
+  useEffect(() => {
+    startLoadingEvents()
+  }, [])
+
     return (
         <div>
             <div className='result-containt'>
                 <h3>Participantes</h3>
                 
                     {events.map(r => (
-                        <div className='datos-result' key={r.id}>
+                        <div className='datos-result' key={r._id}>
                             <div>
                                 <div className='details'>
                                     <h5>{r.name} {r.lastName} </h5>
                                 </div>
                                 <div className='details-telf'>
-                                    <small>(+57) {r.telefono}</small>
+                                    <small>{r.email}</small>
                                 </div>
                                 <div className='btnEdit'>
                                     <button onClick={() => openCrmModal(r)}>
