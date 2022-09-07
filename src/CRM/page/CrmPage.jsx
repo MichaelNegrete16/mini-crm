@@ -24,7 +24,7 @@ const CrmPage = () => {
         // </div>
 
         <div >
-            <nav className='menu' tabIndex='0'>
+            {/* <nav className='menu' tabIndex='0'>
             <div className='smartphone-menu-trigger'></div>
                 <header className='avatar'>
                     <img src="https://cdn.icon-icons.com/icons2/1805/PNG/512/4230530-market-market-store-shop-store_115032.png" alt="IconoMercado" />
@@ -61,6 +61,39 @@ const CrmPage = () => {
                 </dir>
             </main>
 
+
+            <CrmModal/> */}
+
+            <div>
+                <div className='principalSearch'>
+                        <input type="search"  placeholder='Buscar'/>
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                </div>
+
+                <div>
+                    <FormResultado/>
+                </div>
+
+                <div>
+                    <button onClick={openModal} className='btn'> Agregar
+                        <span> </span>
+                        <i className="fa-solid fa-user-plus"></i>
+                    </button>
+                </div>
+
+                <div className='footer'>
+                    <div className='footerContent'>
+                        <button><i className="fa-solid fa-address-book"></i></button>
+                    </div>
+                    <div className='footerLink'>
+                        <a><i className="fa-brands fa-linkedin"></i></a>
+                    </div>
+                    <div className='footerGithub'>
+                        <a><i className="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+            </div>
 
             <CrmModal/>
 

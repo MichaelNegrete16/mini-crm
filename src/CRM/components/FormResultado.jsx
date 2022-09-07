@@ -36,9 +36,9 @@ const FormResultado = () => {
   }, [])
 
     return (
-        <div>
+        <div className='containerPrincipal'>
+            <h3>Lista de contactos</h3>
             <div className='result-containt'>
-                <h3>Participantes</h3>
                 
                     {events.map(r => (
                         <div className='datos-result' key={r._id}>
@@ -47,11 +47,11 @@ const FormResultado = () => {
                                     <h5>{r.name} {r.lastName} </h5>
                                 </div>
                                 <div className='details-telf'>
-                                    <small>{r.email}</small>
+                                    <small>(+57) {r.telefono}</small>
                                 </div>
                                 <div className='btnEdit'>
                                     <button onClick={() => openCrmModal(r)}>
-                                        <i className='fas fa-eye'></i>
+                                        <i className="fa-solid fa-pen"></i>
                                     </button>
                                 </div>
                                 <div className='btnDelete'>
@@ -60,6 +60,7 @@ const FormResultado = () => {
                                     </button>
                                 </div>
                             </div>
+                            <div className='separadorBlanco'></div>
                         </div>
                     ))}
 
