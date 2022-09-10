@@ -1,7 +1,7 @@
 import {useDispatch, useSelector } from "react-redux"
 import Swal from "sweetalert2"
 import crmApi from "../../api/crmApi"
-import { onAddNewEvent, onCloseCrmModal, onDeleteEvent, onLoadEvents, onOpenCrmModal, onUpdateEvent } from "../store/crm/crmSlice"
+import { onAddNewEvent, onCloseCrmModal, onDeleteEvent, onLoadEvents, onOpenCrmModal, onSearEvent, onUpdateEvent } from "../store/crm/crmSlice"
 
 export const useCrmStore = () => {
     
@@ -39,6 +39,20 @@ export const useCrmStore = () => {
         
     }
 
+    const searchElement = async(nombre) => {
+        try {
+            const {data} = await crmApi.get('/')
+            const result = data.msg.filter(registro => registro.name === nombre.name )
+            if(result[0]) {
+                openCrmModal(result[0])
+            }
+
+        } catch (error) {
+            console.log(error)
+            Swal.fire('Error en la base de datos','error')
+        }
+    }
+
     const startDeleteEvent = async(data) => {
         // dispatch(onDeleteEvent({...data}))
         // Eliminar de la base de datos
@@ -53,6 +67,7 @@ export const useCrmStore = () => {
 
     // Funciones para llamar el reducer del modal
     const openCrmModal = (data = '') => {
+        console.log(data)
         dispatch(onOpenCrmModal([{...data}]))
     }
 
@@ -83,7 +98,8 @@ export const useCrmStore = () => {
         openCrmModal,
         closeCrmModal,
         startUpdateEvent,
-        startLoadingEvents
+        startLoadingEvents,
+        searchElement
     }
 
 }

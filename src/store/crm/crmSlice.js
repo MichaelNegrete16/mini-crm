@@ -39,6 +39,10 @@ export const crmSlice = createSlice({
             })
         },
 
+        onSearEvent: (state, {payload}) => {
+            // const result = data.msg.filter(registro => registro.name === nombre.name)
+        },
+
         onDeleteEvent: (state,{payload}) => {
             if(payload){
                 state.events = state.events.filter(event => event._id !== payload._id)
@@ -75,5 +79,6 @@ export const {onAddNewEvent,
               onDeleteEvent,
               onOpenCrmModal,
               onCloseCrmModal,
+              onSearEvent,
               onLoadEvents,
               onSetActiveEvent} = crmSlice.actions
