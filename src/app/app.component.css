@@ -53,13 +53,13 @@
     right: 120px;
   } */
   
-  .btn{
+  /* .btn{
     margin-top: 20px;
     margin-left: 90px;
     color: white;
     background-color: #085ab1;
     border-radius: 50px;
-  }
+  } */
   
   .marcoFooter{
     display: flex;
@@ -111,3 +111,75 @@
     text-decoration: none;
     color: white;
   }
+
+  /* Datos del resultado */
+  
+.datos-result{
+  height: 50px;
+  color: rgb(0, 0, 0);
+  border-radius: 20px;
+  position: relative;
+  padding: 10px;
+  margin-bottom: 1px;
+}
+
+.separadorBlanco{
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  width: 250px;
+  height: 2px;
+}
+
+.details{
+  position: absolute;
+  left: 15px;
+  top: 10px;
+}
+
+.details-telf small{
+  color: #085ab1;
+  position: absolute;
+  top: 25px;
+  left: 15px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.datos-result h5{
+  font-weight: bold;
+  font-size: 15px;
+  margin: 0px;
+}
+
+.btnEdit{
+  position: absolute;
+  top: 15px;
+  right: 55px;
+}
+.btnEdit button{
+  border: none;
+  background: transparent;
+  color: #085ab1;
+}
+.btnDelete{
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
+.btnDelete button{
+  border: none;
+  background: transparent;
+  color: #085ab1;
+}
+
+.btnFinal{
+  position: absolute;
+  left: 37rem;
+  border: none;
+  background: #085ab1;
+  padding: 10px;
+  border-radius: 15px;
+  color: white;
+  bottom: 11rem;
+}

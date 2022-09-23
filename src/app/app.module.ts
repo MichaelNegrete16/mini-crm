@@ -3,16 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms';
+import { ModalComponent } from './modal/modal.component'
+
+// Sweet Alert 
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SweetAlert2Module
   ],
   providers: [],
   bootstrap: [AppComponent]

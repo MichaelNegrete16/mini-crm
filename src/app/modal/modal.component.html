@@ -1,0 +1,43 @@
+<div class="modale">
+    <div class="modaleContent">
+        <div class="modalContainer">
+            <div class="modal-data">
+                <form>
+                    <div class="modal-newTarea">
+                        <input class="form-control" type="text" name="name" placeholder="Nombre" [(ngModel)]="data.name">
+                    </div>
+                    <div class="modal-newTarea">
+                        <input class="form-control" type="text" name='lastName' placeholder="Apellido" [(ngModel)]="data.lastName">
+                    </div>
+                    
+                    <div class="modal-newTarea">
+                        <input class="form-control" type="number" name='telefono' placeholder="Telefono" [(ngModel)]="data.telefono">
+                    </div>
+                    
+                    <div class="modal-newTarea">
+                        <input class="form-control" type="email" name='email' placeholder="Email" [(ngModel)]="data.email">
+                    </div>
+                    
+                    <div class="modal-newTarea">
+                        <input class="form-control" type="text" name='direccion' placeholder="Direccion" [(ngModel)]="data.direccion">
+                    </div>
+      
+                    <div class="containerButton">
+                        <div class="modal-button-save">
+                            <button class="" type="submit" (click)="save()"> Agregar
+                                <span></span>
+                                <i class="fa-solid fa-user-plus"></i>
+                              </button>
+                        </div>
+    
+                        <div class="modal-button-cancel">
+                            <button (click)="closeModal()">X</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>    
+</div>
+
