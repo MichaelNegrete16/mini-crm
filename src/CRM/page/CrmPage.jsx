@@ -9,13 +9,9 @@ const CrmPage = () => {
     const {openCrmModal,searchElement} = useCrmStore()
 
     const [formValues, setFormValues] = useState({
-        name:'',
+        name:''
     })
     const {name} = formValues
-
-    const openModal = () => {
-        openCrmModal()
-    }
 
     // Asignar valor del input al formValue
     const onInputChange = ({target}) => {
@@ -25,12 +21,16 @@ const CrmPage = () => {
         })
         // console.log(target.name);
     }
-
+    
     const handleClick = () => {
         // console.log(formValues)
         searchElement(formValues)
     }
-
+    
+    const openModal = () => {
+        openCrmModal()
+    }
+    
     return (
         <div >
 

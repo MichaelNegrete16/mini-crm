@@ -6,6 +6,7 @@ import CrmPage from './CRM/page/CrmPage'
 
 const CrmApp = () => {
   return (
+    // Creacion del provider para poder acceder a los componentes de redux
     <Provider store={store}>
         <CrmPage/>
     </Provider>

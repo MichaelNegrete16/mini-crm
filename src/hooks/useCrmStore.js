@@ -29,7 +29,7 @@ export const useCrmStore = () => {
 
             // Hacer post a la base de datos
             const {data} = await crmApi.post('/',crmEvent)
-            console.log(data)
+            // console.log(data)
             dispatch(onAddNewEvent({...crmEvent, id: data.msg._id}))
 
         } catch (error) {
@@ -40,9 +40,11 @@ export const useCrmStore = () => {
     }
 
     const searchElement = async(nombre) => {
+        console.log(nombre)
         try {
             const {data} = await crmApi.get('/')
-            const result = data.msg.filter(registro => registro.name === nombre.name )
+            console.log(data)
+            const result = data.msg.filter(registro => (registro.telefono + '') === nombre.name || registro.name === nombre.name)
             if(result[0]) {
                 openCrmModal(result[0])
             }

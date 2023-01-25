@@ -66,9 +66,14 @@ const CrmModal = () => {
 
     const onSubmit = e => {
         e.preventDefault()
-
+        // Verificar que el correo este escrito correctamente
+        const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
+        if(!emailRegex.test(email)){
+            Swal.fire('Correo Mal Escrito','Fijate que este todo correcto','error')
+            return
+        }
         // Validar que tenga un valor
-        if(name && tarea && email && telefono && direccion){
+        if(name && tarea  && telefono && direccion){
             console.log('paso')
             Swal.fire('Registro exitoso','Succes','success')
             startUpdateEvent(formValues)
@@ -77,6 +82,7 @@ const CrmModal = () => {
         }else{
             console.log('Negado')
             Swal.fire('Registro fallido','Todos los campos son obligatorios','error')
+            closeCrmModal()
         }
 
         // Resetear formulario
